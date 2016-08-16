@@ -1,0 +1,25 @@
+{
+  "name": "jobscraper",
+  "version": "1.0.0",
+  "description": "webscraping to find my next job",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/istinson/jobscraper.git"
+  },
+  "keywords": [
+    "nightmare"
+  ],
+  "author": "istinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/istinson/jobscraper/issues"
+  },
+  "homepage": "https://github.com/istinson/jobscraper#readme",
+  "dependencies": {
+    "nightmare": "^2.6.1"
+  }
+}
