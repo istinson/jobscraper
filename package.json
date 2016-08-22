@@ -22,6 +22,8 @@
   "dependencies": {
     "express": "^4.14.0",
     "nightmare": "^2.6.1",
+    "underscore": "^1.8.3",
+    "vo": "^4.0.2",
     "x-ray": "^2.3.0"
   }
 }
