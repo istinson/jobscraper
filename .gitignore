@@ -1,0 +1,5 @@
+### node etc ###
+git
+node_modules/
+.idea/
+hn.js
