@@ -17,6 +17,5 @@ xray('https://slack.com/jobs/dept/engineering', '.posting',
 	  results.forEach(function(item) {
 		  item.id = 'slack' + item.link.substr(23, 6);
 	  });
-	  console.log(results.length);
 	  fs.writeFile('./slack.json', JSON.stringify(results, null, '\  '));
   });
