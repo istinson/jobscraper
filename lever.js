@@ -7,7 +7,6 @@ vo(function* () {
 	var link = yield nightmare
 	.goto('https://www.lever.co/jobs')
 	.wait()
-	.wait(1000)
 	.evaluate(function () {
 		var items = Array.from(document.getElementsByClassName('Engineering'));
 		return items.map(function(item) {
@@ -21,12 +20,16 @@ vo(function* () {
 	return link;
 })(function (err, result) {
 	if (err) return console.log(err);
-	console.log(result);
-	// var job = [];
-	// _.each(result, function(item) {
-	// 	if(item.txsegment.source_string.indexOf('Engineer') > -1) {
-	// 		job.push({id: item.txsegment.key, title: item.txsegment.source_string});
-	// 	}
-	// });
-	// fs.writeFile('./ripple.json', JSON.stringify(job, null, '\  '));
+	var job = [];
+	_.each(result, function(item) {
+		if(item.link) {
+	 		job.push({
+			  id: 'lever' + item.link.slice(item.link.indexOf('/lever/') + 7),
+			  title: item.title.slice(0, item.title.indexOf('\n')),
+			  link: item.link,
+			  loc: item.title.slice(item.title.indexOf('\n') + 1, item.title.indexOf('Full-time') - 1 || item.title.length)
+		  });
+	 	}
+	});
+	fs.writeFile('./lever.json', JSON.stringify(job, null, '\  '));
 });
