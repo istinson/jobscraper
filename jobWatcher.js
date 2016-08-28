@@ -5,17 +5,15 @@ var fs = require('fs');
 
 var JobWatcher = function() {};
 
-JobWatcher.prototype.jobParser = function(result, formatting) {
-	var jobs = [];
-	_.each(result, function (item) {
-		if (item.link) {
-			jobs.push(formatting(item));
-		}
+JobWatcher.prototype.jobParser = function(result, quality, parsing) {
+	return _.map(_.filter(result, function(item) {
+		return quality(item);
+	}), function(item) {
+		return parsing(item);
 	});
-	return jobs;
 };
 
-JobWatcher.prototype.watch = function(careerUrl, jobEval, formatting, filePath) {
+JobWatcher.prototype.watch = function(careerUrl, jobEval, quality, parsing, filePath) {
 	vo(function*() {
 		var nightmare = Nightmare({show: true});
 		var link = yield nightmare
@@ -26,7 +24,7 @@ JobWatcher.prototype.watch = function(careerUrl, jobEval, formatting, filePath) 
 		return link;
 	})(function (err, result) {
 		if (err) return console.log(err);
-		fs.writeFile(filePath, JSON.stringify(JobWatcher.prototype.jobParser(result, formatting), null, '\  '));
+		fs.writeFile(filePath, JSON.stringify(JobWatcher.prototype.jobParser(result, quality, parsing), null, '\  '));
 	});
 };
 

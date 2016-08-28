@@ -1,6 +1,6 @@
-var jobWatcher = require('./jobWatcher.js');
+var jobWatcher = require('./jobWatcher');
 
-function leverFormat(item) {
+function leverParser(item) {
 	return {
 		id: 'lever' + item.link.slice(item.link.indexOf('/lever/') + 7),
 		title: item.title.slice(0, item.title.indexOf('\n')),
@@ -19,4 +19,10 @@ function leverEval() {
 	});
 }
 
-jobWatcher.watch('https://www.lever.co/jobs', leverEval, leverFormat, './lever.json');
+function leverQuality(item) {
+	if (item.link) {
+		return true;
+	}
+}
+
+jobWatcher.watch('https://www.lever.co/jobs', leverEval, leverQuality, leverParser, './lever.json');
