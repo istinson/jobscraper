@@ -1,32 +1,4 @@
-var Nightmare = require('nightmare');
-var vo = require('vo');
-var _ = require('underscore');
-var fs = require('fs');
-
-function jobParser(result, formatting) {
-	var jobs = [];
-	_.each(result, function(item) {
-		if (item.link) {
-			jobs.push(formatting(item));
-		}
-	});
-	return jobs;
-}
-
-function jobWatch(careerUrl, jobEval, formatting, filePath) {
-	vo(function*() {
-		var nightmare = Nightmare({show: true});
-		var link = yield nightmare
-		.goto(careerUrl)
-		.wait()
-		.evaluate(jobEval)
-		yield nightmare.end();
-		return link;
-	})(function (err, result) {
-		if (err) return console.log(err);
-		fs.writeFile(filePath, JSON.stringify(jobParser(result, formatting), null, '\  '));
-	});
-}
+var jobWatcher = require('./jobWatcher.js');
 
 function leverFormat(item) {
 	return {
@@ -47,4 +19,4 @@ function leverEval() {
 	});
 }
 
-jobWatch('https://www.lever.co/jobs', leverEval, leverFormat, './lever.json');
+jobWatcher.watch('https://www.lever.co/jobs', leverEval, leverFormat, './lever.json');
