@@ -1,3 +1,5 @@
+// https://www.npmjs.com/package/vo   FACTOR OUT VO
+// https://www.npmjs.com/package/nightmare-examples#documentation EXAMPLES
 var Nightmare = require('nightmare');
 var vo = require('vo');
 var _ = require('underscore');
