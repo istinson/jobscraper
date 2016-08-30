@@ -11,7 +11,7 @@ function premiseEval() {
 	});
 }
 
-function premiseQuality(item) {
+function premiseFilter(item) {
 	if (item.department === "14227") {
 		return true;
 	}
@@ -27,4 +27,4 @@ function premiseParser(item) {
 }
 
 jobWatcher.watch('https://boards.greenhouse.io/embed/job_board?for=premise&b=https://www.premise.com/openings/',
-  premiseEval, premiseQuality, premiseParser, './premise.json');
+  premiseEval, premiseFilter, premiseParser, './premise.json');

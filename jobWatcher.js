@@ -13,7 +13,7 @@ JobWatcher.prototype.jobParser = function(result, quality, parsing) {
 	});
 };
 
-JobWatcher.prototype.watch = function(careerUrl, jobEval, quality, parsing, filePath) {
+JobWatcher.prototype.watch = function(careerUrl, jobEval, filtering, parsing, filePath) {
 	vo(function*() {
 		var nightmare = Nightmare({show: true});
 		var link = yield nightmare
@@ -24,7 +24,7 @@ JobWatcher.prototype.watch = function(careerUrl, jobEval, quality, parsing, file
 		return link;
 	})(function (err, result) {
 		if (err) return console.log(err);
-		fs.writeFile(filePath, JSON.stringify(JobWatcher.prototype.jobParser(result, quality, parsing), null, '\  '));
+		fs.writeFile(filePath, JSON.stringify(JobWatcher.prototype.jobParser(result, filtering, parsing), null, '\  '));
 	});
 };
 

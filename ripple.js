@@ -3,7 +3,7 @@ var jobWatcher = require('./jobWatcher');
 function rippleEval() {
 	return document.getElementsByTagName('h5');
 }
-function rippleQuality(item) {
+function rippleFilter(item) {
 	if (item.txsegment.source_string.indexOf('Engineer') > -1) {
 		return true;
 	}
@@ -16,4 +16,4 @@ function rippleParser(item) {
 }
 
 jobWatcher.watch('https://ripple.com/company/careers/all-jobs/', rippleEval,
-	rippleQuality, rippleParser, './ripple.json');
+	rippleFilter, rippleParser, './ripple.json');

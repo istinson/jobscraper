@@ -10,7 +10,7 @@ function leverEval() {
 	});
 }
 
-function leverQuality(item) {
+function leverFilter(item) {
 	if (item.link) {
 		return true;
 	}
@@ -25,4 +25,4 @@ function leverParser(item) {
 	};
 }
 
-jobWatcher.watch('https://www.lever.co/jobs', leverEval, leverQuality, leverParser, './lever.json');
+jobWatcher.watch('https://www.lever.co/jobs', leverEval, leverFilter, leverParser, './lever.json');
