@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function premiseEval() {
 	var items = Array.from(document.getElementsByClassName("opening"));
@@ -27,4 +27,4 @@ function premiseParser(item) {
 }
 
 jobWatcher.watch('https://boards.greenhouse.io/embed/job_board?for=premise&b=https://www.premise.com/openings/',
-  premiseEval, premiseFilter, premiseParser, './premise.json');
+  premiseEval, premiseFilter, premiseParser, './json/premise.json');

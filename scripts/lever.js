@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function leverEval() {
 	var items = Array.from(document.getElementsByClassName('Engineering'));
@@ -25,4 +25,4 @@ function leverParser(item) {
 	};
 }
 
-jobWatcher.watch('https://www.lever.co/jobs', leverEval, leverFilter, leverParser, './lever.json');
+jobWatcher.watch('https://www.lever.co/jobs', leverEval, leverFilter, leverParser, './json/lever.json');

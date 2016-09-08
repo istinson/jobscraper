@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function kespryEval() {
 	var items = Array.from(document.getElementsByClassName('opening'));
@@ -27,4 +27,4 @@ function kespryParser(item) {
 	}
 }
 
-jobWatcher.watch('https://boards.greenhouse.io/kespryinc/', kespryEval, kespryFilter, kespryParser, './kespry.json');
+jobWatcher.watch('https://boards.greenhouse.io/kespryinc/', kespryEval, kespryFilter, kespryParser, './json/kespry.json');

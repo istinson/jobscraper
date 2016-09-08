@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function mozillaEval() {
   var items = Array.from(document.getElementsByClassName('position'));
@@ -29,4 +29,4 @@ function mozillaParser(item) {
   }
 }
 
-jobWatcher.watch('https://careers.mozilla.org/listings/', mozillaEval, mozillaFilter, mozillaParser, './mozilla.json');
+jobWatcher.watch('https://careers.mozilla.org/listings/', mozillaEval, mozillaFilter, mozillaParser, './json/mozilla.json');

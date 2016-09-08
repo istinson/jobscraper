@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function ottoEval() {
   var items = Array.from(document.getElementsByClassName('posting-title'));
@@ -27,4 +27,4 @@ function ottoParser(item) {
 	}
 }
 
-jobWatcher.watch('https://jobs.lever.co/otto/', ottoEval, ottoFilter, ottoParser, './otto.json');
+jobWatcher.watch('https://jobs.lever.co/otto/', ottoEval, ottoFilter, ottoParser, './json/otto.json');

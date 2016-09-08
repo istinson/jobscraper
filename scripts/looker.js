@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function lookerEval() {
 	var items = Array.from(document.getElementsByClassName('posting-title'));
@@ -27,4 +27,4 @@ function lookerParser(item) {
 	}
 }
 
-jobWatcher.watch('https://jobs.lever.co/looker/', lookerEval, lookerFilter, lookerParser, './looker.json');
+jobWatcher.watch('https://jobs.lever.co/looker/', lookerEval, lookerFilter, lookerParser, './json/looker.json');

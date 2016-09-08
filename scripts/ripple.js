@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function rippleEval() {
 	return document.getElementsByTagName('h5');
@@ -16,4 +16,4 @@ function rippleParser(item) {
 }
 
 jobWatcher.watch('https://ripple.com/company/careers/all-jobs/', rippleEval,
-	rippleFilter, rippleParser, './ripple.json');
+	rippleFilter, rippleParser, './json/ripple.json');

@@ -1,4 +1,4 @@
-var jobWatcher = require('./jobWatcher');
+var jobWatcher = require('./../jobWatcher');
 
 function cloudFlareEval() {
 	var items = Array.from(document.getElementsByClassName('js-job-container'));
@@ -27,4 +27,4 @@ function cloudFlareParser(item) {
 	}
 }
 
-jobWatcher.watch('https://careers.jobscore.com/careers/cloudflare', cloudFlareEval, cloudFlareFilter, cloudFlareParser, './cloudFlare.json');
+jobWatcher.watch('https://careers.jobscore.com/careers/cloudflare', cloudFlareEval, cloudFlareFilter, cloudFlareParser, './json/cloudFlare.json');
