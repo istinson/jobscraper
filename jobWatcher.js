@@ -16,11 +16,6 @@ JobWatcher.prototype.jobParser = function(oldJobs, result, quality, parsing) {
 	})), function(item) {
 		return item.id;
 	});
-	// return _.map(_.filter(result, function(item) {
-	// 	return quality(item);
-	// }), function(item) {
-	// 	return parsing(item);
-	// });
 };
 
 JobWatcher.prototype.watch = function(careerUrl, jobEval, filtering, parsing, filePath) {
