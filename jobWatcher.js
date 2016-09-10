@@ -24,7 +24,7 @@ JobWatcher.prototype.watch = function(careerUrl, jobEval, filtering, parsing, fi
 		var link = yield nightmare
 		.goto(careerUrl)
 		.wait()
-		.evaluate(jobEval)
+		.evaluate(jobEval);
 		yield nightmare.end();
 		return link;
 	})(function (err, result) {
