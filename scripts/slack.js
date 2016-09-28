@@ -1,4 +1,7 @@
 var jobWatcher = require('./../jobWatcher');
+const config = require('../config');
+const mongoose = require('mongoose');
+mongoose.connect(config.getDbConnectionString());
 
 function slackEval() {
 	var items = Array.from(document.getElementsByTagName('h4'));
@@ -20,12 +23,11 @@ function slackFilter(item) {
 
 function slackParser(item) {
 	return {
-		id: `slack${item.link.slice(23, 29)}`,
+		_id: `slack${item.link.slice(23, 29)}`,
 		title: item.title,
 		link: item.link,
 		loc: item.loc
 	};
 }
 
-jobWatcher.watch('https://slack.com/jobs/dept/engineering', slackEval,
-	slackFilter, slackParser, './json/slack.json');
+jobWatcher.watch('https://slack.com/jobs/dept/engineering', slackEval, slackFilter, slackParser);

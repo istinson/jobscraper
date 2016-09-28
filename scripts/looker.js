@@ -1,4 +1,7 @@
 var jobWatcher = require('./../jobWatcher');
+const config = require('../config');
+const mongoose = require('mongoose');
+mongoose.connect(config.getDbConnectionString());
 
 function lookerEval() {
 	var items = Array.from(document.getElementsByClassName('posting-title'));
@@ -23,8 +26,8 @@ function lookerParser(item) {
 		title: item.title,
 		loc: item.loc,
 		link: item.link,
-		id: `looker${item.link.slice(item.link.indexOf('looker/') + 7)}`
+		_id: `looker${item.link.slice(item.link.indexOf('looker/') + 7)}`
 	}
 }
 
-jobWatcher.watch('https://jobs.lever.co/looker/', lookerEval, lookerFilter, lookerParser, './json/looker.json');
+jobWatcher.watch('https://jobs.lever.co/looker/', lookerEval, lookerFilter, lookerParser);

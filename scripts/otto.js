@@ -1,4 +1,7 @@
 var jobWatcher = require('./../jobWatcher');
+const config = require('../config');
+const mongoose = require('mongoose');
+mongoose.connect(config.getDbConnectionString());
 
 function ottoEval() {
   var items = Array.from(document.getElementsByClassName('posting-title'));
@@ -20,11 +23,11 @@ function ottoFilter(item) {
 
 function ottoParser(item) {
 	return {
+		_id: `otto${item.link.slice(item.link.indexOf('otto/') + 5)}`,
 		title: item.title,
 		loc: item.loc,
-		link: item.link,
-		id: `otto${item.link.slice(item.link.indexOf('otto/') + 5)}`
+		link: item.link
 	}
 }
 
-jobWatcher.watch('https://jobs.lever.co/otto/', ottoEval, ottoFilter, ottoParser, './json/otto.json');
+jobWatcher.watch('https://jobs.lever.co/otto/', ottoEval, ottoFilter, ottoParser);

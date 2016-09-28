@@ -1,4 +1,7 @@
 var jobWatcher = require('./../jobWatcher');
+const config = require('../config');
+const mongoose = require('mongoose');
+mongoose.connect(config.getDbConnectionString());
 
 function githubEval() {
 	var items = Array.from(document.getElementsByClassName('posting-title'));
@@ -23,8 +26,8 @@ function githubParser(item) {
 		title: item.title,
 		loc: item.loc,
 		link: item.link,
-		id: `github${item.link.slice(item.link.indexOf('github/') + 7)}`
+		_id: `github${item.link.slice(item.link.indexOf('github/') + 7)}`
 	}
 }
 
-jobWatcher.watch('https://jobs.lever.co/github/', githubEval, githubFilter, githubParser, './json/github.json');
+jobWatcher.watch('https://jobs.lever.co/github/', githubEval, githubFilter, githubParser);

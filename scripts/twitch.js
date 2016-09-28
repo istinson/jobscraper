@@ -1,4 +1,7 @@
 var jobWatcher = require('./../jobWatcher');
+const config = require('../config');
+const mongoose = require('mongoose');
+mongoose.connect(config.getDbConnectionString());
 
 function twitchEval() {
 	var items = Array.from(document.getElementsByClassName('posting-title'));
@@ -24,8 +27,8 @@ function twitchParser(item) {
 		department: item.department,
 		loc: item.loc,
 		link: item.link,
-		id: `twitch${item.link.slice(item.link.indexOf('twitch/') + 7)}`
+		_id: `twitch${item.link.slice(item.link.indexOf('twitch/') + 7)}`
 	}
 }
 
-jobWatcher.watch('https://jobs.lever.co/twitch', twitchEval, twitchFilter, twitchParser, './json/twitch.json');
+jobWatcher.watch('https://jobs.lever.co/twitch', twitchEval, twitchFilter, twitchParser);

@@ -1,4 +1,7 @@
 var jobWatcher = require('./../jobWatcher');
+const config = require('../config');
+const mongoose = require('mongoose');
+mongoose.connect(config.getDbConnectionString());
 
 function mozillaEval() {
   var items = Array.from(document.getElementsByClassName('position'));
@@ -22,11 +25,11 @@ function mozillaFilter(item) {
 
 function mozillaParser(item) {
   return {
-	  id: `mozilla${item.link.slice(item.link.indexOf('gh/') + 3)}`,
+	  _id: `mozilla${item.link.slice(item.link.indexOf('gh/') + 3)}`,
 	  title: item.title,
 	  link: `https://careers.mozilla.org${item.link}`,
 	  loc: item.loc
   }
 }
 
-jobWatcher.watch('https://careers.mozilla.org/listings/', mozillaEval, mozillaFilter, mozillaParser, './json/mozilla.json');
+jobWatcher.watch('https://careers.mozilla.org/listings/', mozillaEval, mozillaFilter, mozillaParser);

@@ -1,4 +1,7 @@
 var jobWatcher = require('./../jobWatcher');
+const config = require('../config');
+const mongoose = require('mongoose');
+mongoose.connect(config.getDbConnectionString());
 
 function cloudFlareEval() {
 	var items = Array.from(document.getElementsByClassName('js-job-container'));
@@ -20,11 +23,11 @@ function cloudFlareFilter(item) {
 
 function cloudFlareParser(item) {
 	return {
-		id: `cloudflare${item.link.slice(-22)}`,
+		_id: `cloudflare${item.link.slice(-22)}`,
 		title: item.title,
 		loc: item.loc,
 		link: `https://careers.jobscore.com${item.link}`
 	}
 }
 
-jobWatcher.watch('https://careers.jobscore.com/careers/cloudflare', cloudFlareEval, cloudFlareFilter, cloudFlareParser, './json/cloudFlare.json');
+jobWatcher.watch('https://careers.jobscore.com/careers/cloudflare', cloudFlareEval, cloudFlareFilter, cloudFlareParser);
