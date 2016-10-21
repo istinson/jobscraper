@@ -13,7 +13,7 @@ JobWatcher.prototype.jobParser = function(result, quality, parsing) {
 
 JobWatcher.prototype.watch = function(careerUrl, jobEval, filtering, parsing) {
 	return new Promise(function(resolve, reject) {
-		var nightmare = Nightmare({show: true});
+		var nightmare = Nightmare();
 		nightmare
 		.goto(careerUrl)
 		.wait()
