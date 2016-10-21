@@ -1,6 +1,5 @@
 const Nightmare = require('nightmare');
 const _ = require('underscore');
-const Jobs = require('./models/jobModel');
 
 const JobWatcher = function() {};
 
@@ -13,26 +12,21 @@ JobWatcher.prototype.jobParser = function(result, quality, parsing) {
 };
 
 JobWatcher.prototype.watch = function(careerUrl, jobEval, filtering, parsing) {
-	var nightmare = Nightmare({show: true});
-	nightmare
-	  .goto(careerUrl)
+	return new Promise(function(resolve, reject) {
+		var nightmare = Nightmare({show: true});
+		nightmare
+		.goto(careerUrl)
 		.wait()
 		.evaluate(jobEval)
 		.end()
 		.then(function (result) {
-			JobWatcher.prototype.jobParser(result, filtering, parsing).forEach(job => {
-				Jobs.findByIdAndUpdate(job._id, job, {upsert: true, setDefaultsOnInsert: true}, function (err, doc) {
-					if (err) {
-						throw err;
-					} else {
-						console.log("succesfully saved", doc);
-					}
-				});
-			});
+			let parsed = JobWatcher.prototype.jobParser(result, filtering, parsing);
+			resolve(parsed);
 		})
 		.catch(function (err) {
-			throw err;
+			reject(err);
 		});
+	});
 };
 
 module.exports = new JobWatcher();
