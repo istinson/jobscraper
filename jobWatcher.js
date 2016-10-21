@@ -1,7 +1,4 @@
-// https://www.npmjs.com/package/vo   FACTOR OUT VO
-// https://www.npmjs.com/package/nightmare-examples#documentation EXAMPLES
 const Nightmare = require('nightmare');
-const vo = require('vo');
 const _ = require('underscore');
 const Jobs = require('./models/jobModel');
 
@@ -16,23 +13,26 @@ JobWatcher.prototype.jobParser = function(result, quality, parsing) {
 };
 
 JobWatcher.prototype.watch = function(careerUrl, jobEval, filtering, parsing) {
-	vo(function*() {
-		var nightmare = Nightmare({show: true});
-		var link = yield nightmare
-		.goto(careerUrl)
+	var nightmare = Nightmare({show: true});
+	nightmare
+	  .goto(careerUrl)
 		.wait()
-		.evaluate(jobEval);
-		yield nightmare.end();
-		return link;
-	})(function (err, result) {
-		if (err) return console.log(err);
-		JobWatcher.prototype.jobParser(result, filtering, parsing).forEach(job => {
-			Jobs.findByIdAndUpdate(job._id, job, {upsert: true, setDefaultsOnInsert: true}, function (err, doc) {
-				if (err) console.log('error', err);
-				console.log("succesfully saved", doc);
+		.evaluate(jobEval)
+		.end()
+		.then(function (result) {
+			JobWatcher.prototype.jobParser(result, filtering, parsing).forEach(job => {
+				Jobs.findByIdAndUpdate(job._id, job, {upsert: true, setDefaultsOnInsert: true}, function (err, doc) {
+					if (err) {
+						throw err;
+					} else {
+						console.log("succesfully saved", doc);
+					}
+				});
 			});
+		})
+		.catch(function (err) {
+			throw err;
 		});
-	});
 };
 
 module.exports = new JobWatcher();

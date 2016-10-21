@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/istinson/jobscraper#readme",
   "dependencies": {
+    "mongoose": "^4.6.1",
     "nightmare": "^2.6.1",
-    "underscore": "^1.8.3",
-    "vo": "^4.0.2"
+    "underscore": "^1.8.3"
   }
 }
